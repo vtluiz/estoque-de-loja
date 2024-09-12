@@ -1,0 +1,108 @@
+importar csv
+
+# Função para cadastrar produto
+def cadastrar_produto():
+    nome = input("Nome do produto: ")
+    código = input("Código do produto: ")
+    preço = float(input("Preço do produto: "))
+    quantidade = int(input("Quantidade em estoque: "))
+
+    com open('estoque.csv', 'a', newline='') como arquivo:
+        escritor = csv.writer(arquivo)
+        escritor.writerow([nome, código, preço, quantidade])
+    print("Produto cadastrado com sucesso!")
+
+# Chama a função para cadastrar o produto
+cadastrar_produto()
+
+
+importar csv
+
+#verifique se o produto já existe
+def atualizar_estoque_existente(código, quantidade):
+    linhas = []
+    encontrado = Falso
+
+    com open('estoque.csv', 'r') como arquivo:
+        leitor = csv.reader(arquivo)
+        para linha no leitor:
+            se linha[1] == codigo:
+                linha[3] = str(int(linha[3]) + quantidade)
+                encontrado = True
+            linhas.append(linha)
+
+    se encontrado:
+        com open('estoque.csv', 'w', newline='') como arquivo:
+            escritor = csv.writer(arquivo)
+            escritor.escritoras(linhas)
+        retornar Verdadeiro
+    retornar Falso
+
+def cadastrar_produto():
+    nome = input("Nome do produto: ")
+    código = input("Código do produto: ")
+    preço = float(input("Preço do produto: "))
+    quantidade = int(input("Quantidade em estoque: "))
+
+    se não atualizar_estoque_existente(código, quantidade):
+        com open('estoque.csv', 'a', newline='') como arquivo:
+            escritor = csv.writer(arquivo)
+            escritor.writerow([nome, código, preço, quantidade])
+        print("Produto cadastrado com sucesso!")
+    outro:
+        print(f"Estoque atualizado para o produto {nome}.")
+
+cadastrar_produto()
+
+
+
+
+importar csv
+
+# Exibir todos os produtos e suas respectivas quantidades.
+def exibir_produtos():
+    tentar:
+        com open('estoque.csv', 'r') como arquivo:
+            leitor = csv.reader(arquivo)
+            print("Produtos em Estoque:")
+            imprimir("--------------------")
+            print("Nome | Código | Preço | Quantidade")
+            imprimir("--------------------")
+            para linha no leitor:
+                imprimir(f"{linha[0]} | {linha[1]} | {linha[2]} | {linha[3]}")
+
+    exceto FileNotFoundError:
+        print("O arquivo de estoque não foi encontrado. Verifique se o arquivo 'estoque.csv' existe.")
+
+# Chama a função para exibir os produtos
+exibir_produtos()
+
+
+
+
+importar csv
+
+# remover produto do estoque
+def remover_produto():
+    codigo = input("Digite o código do produto a ser removido: ")
+
+    linhas = []
+    encontrado = Falso
+
+    com open('estoque.csv', 'r') como arquivo:
+        leitor = csv.reader(arquivo)
+        para linha no leitor:
+            se linha[1] == codigo:
+                encontrado = True
+                continuar # Pula a linha do produto a ser removido
+            linhas.append(linha)
+
+    se encontrado:
+        com open('estoque.csv', 'w', newline='') como arquivo:
+            escritor = csv.writer(arquivo)
+            escritor.escritoras(linhas)
+        print("Produto removido com sucesso!")
+    outro:
+        print("Produto não encontrado.")
+
+remover_produto()
